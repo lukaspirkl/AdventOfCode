@@ -59,7 +59,6 @@ int calculateB(int a, int b)
 	return data[0];
 }
 
-
 TEST(Day02, ExampleA1)
 {
 	EXPECT_EQ(calculateA("1,9,10,3,2,3,11,0,99,30,40,50"), "3500,9,10,70,2,3,11,0,99,30,40,50");
