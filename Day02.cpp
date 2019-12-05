@@ -1,19 +1,8 @@
 #include "pch.h"
+#include "aoc.h"
 
 namespace
 {
-	std::vector<int> split(const std::string& s)
-	{
-		std::vector<int> tokens;
-		std::string token;
-		std::istringstream tokenStream(s);
-		while (std::getline(tokenStream, token, ','))
-		{
-			tokens.push_back(std::stoi(token));
-		}
-		return tokens;
-	}
-
 	std::string join(std::vector<int> data)
 	{
 		std::stringstream result;
@@ -23,40 +12,20 @@ namespace
 		return s;
 	}
 
-	void process(std::vector<int>& data)
-	{
-		size_t current = 0;
-		while (data[current] != 99)
-		{
-			switch (data[current])
-			{
-			case 1:
-				data[data[current + 3]] = data[data[current + 1]] + data[data[current + 2]];
-				break;
-			case 2:
-				data[data[current + 3]] = data[data[current + 1]] * data[data[current + 2]];
-				break;
-			default:
-				break;
-			}
-			current += 4;
-		}
-	}
-
 	std::string calculateA(std::string input)
 	{
-		std::vector<int> data = split(input);
-		process(data);
+		std::vector<int> data = aoc::splitInt(input);
+		aoc::runIntcode(0, data);
 		return join(data);
 	}
 
 	int calculateB(int a, int b)
 	{
-		std::vector<int> data = split("1,0,0,3,1,1,2,3,1,3,4,3,1,5,0,3,2,1,10,19,1,19,5,23,1,6,23,27,1,27,5,31,2,31,10,35,2,35,6,39,1,39,5,43,2,43,9,47,1,47,6,51,1,13,51,55,2,9,55,59,1,59,13,63,1,6,63,67,2,67,10,71,1,9,71,75,2,75,6,79,1,79,5,83,1,83,5,87,2,9,87,91,2,9,91,95,1,95,10,99,1,9,99,103,2,103,6,107,2,9,107,111,1,111,5,115,2,6,115,119,1,5,119,123,1,123,2,127,1,127,9,0,99,2,0,14,0");
+		std::vector<int> data = aoc::splitInt("1,0,0,3,1,1,2,3,1,3,4,3,1,5,0,3,2,1,10,19,1,19,5,23,1,6,23,27,1,27,5,31,2,31,10,35,2,35,6,39,1,39,5,43,2,43,9,47,1,47,6,51,1,13,51,55,2,9,55,59,1,59,13,63,1,6,63,67,2,67,10,71,1,9,71,75,2,75,6,79,1,79,5,83,1,83,5,87,2,9,87,91,2,9,91,95,1,95,10,99,1,9,99,103,2,103,6,107,2,9,107,111,1,111,5,115,2,6,115,119,1,5,119,123,1,123,2,127,1,127,9,0,99,2,0,14,0");
 		data[1] = a;
 		data[2] = b;
 
-		process(data);
+		aoc::runIntcode(0, data);
 
 		return data[0];
 	}
