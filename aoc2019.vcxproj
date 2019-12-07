@@ -50,6 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="aoc.h" />
+    <ClInclude Include="intcode.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,8 @@
     <ClCompile Include="Day04.cpp" />
     <ClCompile Include="Day05.cpp" />
     <ClCompile Include="Day06.cpp" />
+    <ClCompile Include="Day07.cpp" />
+    <ClCompile Include="intcode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

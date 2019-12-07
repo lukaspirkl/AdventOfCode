@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "aoc.h"
+#include "intcode.h"
 
 namespace
 {
@@ -15,8 +16,9 @@ namespace
 	std::string calculateA(std::string input)
 	{
 		std::vector<int> data = aoc::splitInt(input);
-		aoc::runIntcode(0, data);
-		return join(data);
+		aoc::intcode intcode(data);
+		intcode.run(0);
+		return join(intcode.getData());
 	}
 
 	int calculateB(int a, int b)
@@ -25,9 +27,10 @@ namespace
 		data[1] = a;
 		data[2] = b;
 
-		aoc::runIntcode(0, data);
+		aoc::intcode intcode(data);
+		intcode.run(0);
 
-		return data[0];
+		return intcode.getData()[0];
 	}
 
 	TEST(Day02, ExampleA1)

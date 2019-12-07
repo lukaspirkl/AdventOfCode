@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "aoc.h"
+#include "intcode.h"
 
 namespace
 {
@@ -7,14 +8,16 @@ namespace
 	TEST(Day05, ExampleA1)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(1, aoc::splitInt("3,0,4,0,99"), output);
+		aoc::intcode intcode("3,0,4,0,99");
+		intcode.run(1, output);
 		EXPECT_EQ(output[0], 1);
 	}
 
 	TEST(Day05, InputA)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(1, aoc::splitInt(input), output);
+		aoc::intcode intcode(input);
+		intcode.run(1, output);
 		EXPECT_EQ(output.back(), 8332629);
 	}
 
@@ -23,28 +26,32 @@ namespace
 	TEST(Day05, ExampleB1)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(1, aoc::splitInt(exampleB), output);
+		aoc::intcode intcode(exampleB);
+		intcode.run(1, output);
 		EXPECT_EQ(output[0], 999);
 	}
 
 	TEST(Day05, ExampleB2)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(8, aoc::splitInt(exampleB), output);
+		aoc::intcode intcode(exampleB);
+		intcode.run(8, output);
 		EXPECT_EQ(output[0], 1000);
 	}
 
 	TEST(Day05, ExampleB3)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(10, aoc::splitInt(exampleB), output);
+		aoc::intcode intcode(exampleB);
+		intcode.run(10, output);
 		EXPECT_EQ(output[0], 1001);
 	}
 
 	TEST(Day05, InputB)
 	{
 		std::vector<int> output;
-		aoc::runIntcode(5, aoc::splitInt(input), output);
+		aoc::intcode intcode(input);
+		intcode.run(5, output);
 		EXPECT_EQ(output.back(), 8805067);
 	}
 }
