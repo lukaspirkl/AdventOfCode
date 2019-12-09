@@ -3,19 +3,23 @@
 
 namespace aoc
 {
-	intcode::intcode(std::vector<int> data)
+	intcode::intcode(std::vector<long long> data)
 	{
-		this->data = data;
+		this->originalDataSize = data.size();
+		this->data = std::vector<long long>(100000);
+		for (size_t i = 0; i < data.size(); i++)
+		{
+			this->data[i] = data[i];
+		}
 	}
 
-	intcode::intcode(const std::string& data)
+	intcode::intcode(const std::string& data) : intcode(aoc::splitLongLong(data))
 	{
-		this->data = aoc::splitInt(data);
 	}
 
-	std::vector<int> intcode::getData()
+	std::vector<long long> intcode::getData()
 	{
-		return data;
+		return std::vector<long long>(data.begin(), data.begin() + originalDataSize);
 	}
 
 	int intcode::getInstruction()
@@ -23,12 +27,16 @@ namespace aoc
 		return data[pc] % 100;
 	}
 
-	int intcode::get(int param)
+	long long intcode::get(int param)
 	{
 		int parameterMode = data[pc] / (int)pow(10, param + 2) % 10;
 		if (parameterMode == 1)
 		{
 			return data[pc + param + 1];
+		}
+		else if (parameterMode == 2)
+		{
+			return data[relativeBase + data[pc + param + 1]];
 		}
 		else
 		{
@@ -36,23 +44,37 @@ namespace aoc
 		}
 	}
 
-	void intcode::set(int param, int value)
+	void intcode::set(int param, long long value)
 	{
-		data[data[pc + param + 1]] = value;
+		int parameterMode = data[pc] / (int)pow(10, param + 2) % 10;
+		/*if (parameterMode == 1)
+		{
+			// this is not allowed
+			data[pc + param + 1] = value;
+		}
+		else*/ if (parameterMode == 2)
+		{
+			data[relativeBase + data[pc + param + 1]] = value;
+		}
+		else
+		{
+			data[data[pc + param + 1]] = value;
+		}
 	}
 
-	void intcode::run(int input, std::vector<int>& output)
+	void intcode::run(long long input, std::vector<long long>& output)
 	{
-		std::queue<int> inputQueue;
+		std::queue<long long> inputQueue;
 		inputQueue.push(input);
 		run(inputQueue, output);
 	}
 
-	void intcode::run(std::queue<int>& input, std::vector<int>& output)
+	void intcode::run(std::queue<long long>& input, std::vector<long long>& output)
 	{
 		while (true)
 		{
-			switch (run())
+			auto result = run();
+			switch (result)
 			{
 			case intcode::result::programEnded:
 				return;
@@ -92,6 +114,7 @@ namespace aoc
 					return intcode::result::inputRequested;
 				}
 				set(0, io);
+				pcWhenStopped = std::numeric_limits<size_t>::max();
 				pc += 2;
 				break;
 			case 4:
@@ -101,6 +124,7 @@ namespace aoc
 					io = get(0);
 					return intcode::result::outputProvided;
 				}
+				pcWhenStopped = std::numeric_limits<size_t>::max();
 				pc += 2;
 				break;
 			case 5:
@@ -144,6 +168,10 @@ namespace aoc
 					set(2, 0);
 				}
 				pc += 4;
+				break;
+			case 9:
+				relativeBase += get(0);
+				pc += 2;
 				break;
 			default:
 				//TODO: Throw exception or something

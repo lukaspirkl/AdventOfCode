@@ -24,7 +24,7 @@ namespace
 
 	int getSignalA(const std::string& prgString, std::vector<int>& phases)
 	{
-		auto program = aoc::splitInt(prgString);
+		auto program = aoc::splitLongLong(prgString);
 
 		int signal = 0;
 		for (size_t i = 0; i < phases.size(); i++)
@@ -51,7 +51,7 @@ namespace
 
 	int getSignalB(const std::string& prgString, std::vector<int>& phases)
 	{
-		auto program = aoc::splitInt(prgString);
+		auto program = aoc::splitLongLong(prgString);
 
 		std::vector<aoc::intcode> amps;
 		for (size_t i = 0; i < phases.size(); i++)
