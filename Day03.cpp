@@ -15,30 +15,15 @@ namespace
 		return tokens;
 	}
 
-	struct Coords
+	int calculate(std::stringstream& input, int func(std::pair<aoc::Coords, std::map<int, int>>))
 	{
-		int x{ 0 };
-		int y{ 0 };
-
-		bool operator=(const Coords& o) const {
-			return x == o.x && y == o.y;
-		}
-
-		bool operator<(const Coords& o) const {
-			return x < o.x || (x == o.x && y < o.y);
-		}
-	};
-
-
-	int calculate(std::stringstream& input, int func(std::pair<Coords, std::map<int, int>>))
-	{
-		std::map<Coords, std::map<int, int>> data;
+		std::map<aoc::Coords, std::map<int, int>> data;
 		int lineNumber = 0;
 		for (std::string line; std::getline(input, line); )
 		{
 			lineNumber++;
 			int steps = 0;
-			Coords current;
+			aoc::Coords current;
 			for (auto& step : split(line))
 			{
 				int distance = std::stoi(step.substr(1, step.size() - 1));
@@ -89,7 +74,7 @@ namespace
 
 	int calculateA(std::stringstream& input)
 	{
-		return calculate(input, [](std::pair<Coords, std::map<int, int>> pair) { return std::abs(pair.first.x) + std::abs(pair.first.y); });
+		return calculate(input, [](std::pair<aoc::Coords, std::map<int, int>> pair) { return std::abs(pair.first.x) + std::abs(pair.first.y); });
 	}
 
 	TEST(Day03, ExampleA1)
@@ -131,7 +116,7 @@ namespace
 
 	int calculateB(std::stringstream& input)
 	{
-		return calculate(input, [](std::pair<Coords, std::map<int, int>> pair) { 
+		return calculate(input, [](std::pair<aoc::Coords, std::map<int, int>> pair) { 
 			int sum = 0;
 			for (const auto& pair2 : pair.second)
 			{

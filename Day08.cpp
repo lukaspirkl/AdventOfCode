@@ -11,17 +11,17 @@ namespace
 
 		for (size_t i = 0; i < input.size(); i++)
 		{
-			int layer = i / (25 * 6);
-			int pixel = i % (25 * 6);
+			size_t layer = i / (25 * 6);
+			size_t pixel = i % (25 * 6);
 
 			layers[layer][pixel] = (int)input[i] - 48; //ASCII numeric character
 		}
 
-		int fewestZeroCount = std::numeric_limits<int>::max();
-		int fewestZeroLayer = 0;
+		size_t fewestZeroCount = std::numeric_limits<size_t>::max();
+		size_t fewestZeroLayer = 0;
 		for (size_t i = 0; i < layers.size(); i++)
 		{
-			int zeroCount = std::count(layers[i].begin(), layers[i].end(), 0);
+			size_t zeroCount = std::count(layers[i].begin(), layers[i].end(), 0);
 			if (fewestZeroCount > zeroCount)
 			{
 				fewestZeroLayer = i;
@@ -29,8 +29,8 @@ namespace
 			}
 		}
 
-		int oneCount = std::count(layers[fewestZeroLayer].begin(), layers[fewestZeroLayer].end(), 1);
-		int twoCount = std::count(layers[fewestZeroLayer].begin(), layers[fewestZeroLayer].end(), 2);
+		size_t oneCount = std::count(layers[fewestZeroLayer].begin(), layers[fewestZeroLayer].end(), 1);
+		size_t twoCount = std::count(layers[fewestZeroLayer].begin(), layers[fewestZeroLayer].end(), 2);
 
 		EXPECT_EQ(oneCount * twoCount, 2250);
 	}
@@ -43,8 +43,8 @@ namespace
 
 		for (size_t i = 0; i < input.size(); i++)
 		{
-			int layer = i / (25 * 6);
-			int pixel = i % (25 * 6);
+			size_t layer = i / (25 * 6);
+			size_t pixel = i % (25 * 6);
 
 			layers[layer][pixel] = (int)input[i] - 48; //ASCII numeric character
 		}

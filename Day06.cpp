@@ -33,7 +33,7 @@ namespace
 		return sum;
 	}
 
-	int calculateB(std::string input)
+	size_t calculateB(std::string input)
 	{
 		std::map<std::string, std::string> data;
 		populate(input, data);

@@ -44,7 +44,7 @@ namespace
 			{
 				return -1;
 			}
-			signal = amp.io;
+			signal = (int)amp.io;
 		}
 		return signal;
 	}
@@ -81,7 +81,7 @@ namespace
 					run = false;
 					continue;
 				}
-				signal = amp.io;
+				signal = (int)amp.io;
 			}
 		}
 		return signal;

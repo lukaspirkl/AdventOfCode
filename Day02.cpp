@@ -21,7 +21,7 @@ namespace
 		aoc::intcode intcode(data);
 		intcode.run(0);
 
-		return intcode.getData()[0];
+		return (int)intcode.getData()[0];
 	}
 
 	TEST(Day02, ExampleA1)
