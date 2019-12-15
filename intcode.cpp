@@ -47,12 +47,12 @@ namespace aoc
 	void intcode::set(int param, long long value)
 	{
 		int parameterMode = data[pc] / (int)pow(10, param + 2) % 10;
-		/*if (parameterMode == 1)
+		if (parameterMode == 1)
 		{
-			// this is not allowed
-			data[pc + param + 1] = value;
+			throw std::exception("Invalid parameter mode (1) when setting value.");
+			//data[pc + param + 1] = value;
 		}
-		else*/ if (parameterMode == 2)
+		else if (parameterMode == 2)
 		{
 			data[relativeBase + data[pc + param + 1]] = value;
 		}
@@ -86,8 +86,7 @@ namespace aoc
 				output.push_back(io);
 				break;
 			default:
-				//TODO: Throw exception or something
-				return;
+				throw std::exception("Unknown intcode result.");
 				break;
 			}
 		}
@@ -174,8 +173,7 @@ namespace aoc
 				pc += 2;
 				break;
 			default:
-				//TODO: Throw exception or something
-				return intcode::result::programEnded;
+				throw std::exception("Unknown opcode.");
 				break;
 			}
 		}

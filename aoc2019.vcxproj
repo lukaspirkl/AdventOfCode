@@ -69,6 +69,7 @@
     <ClCompile Include="Day12.cpp" />
     <ClCompile Include="Day13.cpp" />
     <ClCompile Include="Day14.cpp" />
+    <ClCompile Include="Day15.cpp" />
     <ClCompile Include="intcode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -91,6 +92,7 @@
     <Text Include="Day11.txt" />
     <Text Include="Day13.txt" />
     <Text Include="Day14.txt" />
+    <Text Include="Day15.txt" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
