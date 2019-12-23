@@ -75,6 +75,7 @@
     <ClCompile Include="Day18.cpp" />
     <ClCompile Include="Day19.cpp" />
     <ClCompile Include="Day21.cpp" />
+    <ClCompile Include="Day22.cpp" />
     <ClCompile Include="intcode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -103,11 +104,13 @@
     <Text Include="Day18.txt" />
     <Text Include="Day19.txt" />
     <Text Include="Day21.txt" />
+    <Text Include="Day22.txt" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets" Condition="Exists('packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" />
+    <Import Project="packages\googletestmock.v.140.1.0.1\build\native\googletestmock.v.140.targets" Condition="Exists('packages\googletestmock.v.140.1.0.1\build\native\googletestmock.v.140.targets')" />
   </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -192,5 +195,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1\build\native\Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.targets'))" />
+    <Error Condition="!Exists('packages\googletestmock.v.140.1.0.1\build\native\googletestmock.v.140.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\googletestmock.v.140.1.0.1\build\native\googletestmock.v.140.targets'))" />
   </Target>
 </Project>
