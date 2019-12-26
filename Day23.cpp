@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day23__Category_Six
+
 namespace
 {
 	typedef std::pair<long long, long long> packet;
@@ -94,7 +96,7 @@ namespace
 		}
 	}
 
-	TEST(Day23, InputA)
+	TEST(NAME, InputA)
 	{
 		EXPECT_EQ(compute(create()), 23626);
 	}
@@ -183,7 +185,7 @@ namespace
 		}
 	}
 
-	TEST(Day23, InputB)
+	TEST(NAME, InputB)
 	{
 		EXPECT_EQ(computeWithNAT(create()), 19019);
 	}

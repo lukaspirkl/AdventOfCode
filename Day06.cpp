@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include <regex>
 
+#define NAME Day06__Universal_Orbit_Map
+
 namespace
 {
 	void populate(std::string input, std::map<std::string, std::string> &data)
@@ -60,25 +62,25 @@ namespace
 		return san.size() + you.size() - 2;
 	}
 
-	TEST(Day06, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		std::string input = "COM)B\nB)C\nC)D\nD)E\nE)F\nB)G\nG)H\nD)I\nE)J\nJ)K\nK)L";
 		EXPECT_EQ(calculateA(input), 42);
 	}
 
-	TEST(Day06, InputA)
+	TEST(NAME, InputA)
 	{
 		std::string input = aoc::readInputFile("Day06.txt").str();
 		EXPECT_EQ(calculateA(input), 292387);
 	}
 
-	TEST(Day06, ExampleB1)
+	TEST(NAME, ExampleB1)
 	{
 		std::string input = "COM)B\nB)C\nC)D\nD)E\nE)F\nB)G\nG)H\nD)I\nE)J\nJ)K\nK)L\nK)YOU\nI)SAN";
 		EXPECT_EQ(calculateB(input), 4);
 	}
 
-	TEST(Day06, InputB)
+	TEST(NAME, InputB)
 	{
 		std::string input = aoc::readInputFile("Day06.txt").str();
 		EXPECT_EQ(calculateB(input), 433);

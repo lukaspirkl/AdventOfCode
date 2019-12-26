@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day11__Space_Police
+
 namespace
 {
 	std::string expected = R"(
@@ -102,13 +104,13 @@ namespace
 		};
 	}
 
-	TEST(Day11, InputA)
+	TEST(NAME, InputA)
 	{
 		std::map<aoc::Coords, int> plates;
 		populatePlates(0, plates);
 		EXPECT_EQ(plates.size(), 1909);
 	}
-	TEST(Day11, InputB)
+	TEST(NAME, InputB)
 	{
 		std::map<aoc::Coords, int> plates;
 		populatePlates(1, plates);

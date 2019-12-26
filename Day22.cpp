@@ -3,6 +3,8 @@
 #include "gmock/gmock.h"
 #include <regex>
 
+#define NAME Day22__Slam_Shuffle
+
 namespace
 {
 	typedef std::vector<size_t> deck;
@@ -25,7 +27,7 @@ namespace
 		return newd;
 	}
 
-	TEST(Day22, DealIntoNewStack)
+	TEST(NAME, DealIntoNewStack)
 	{
 		deck d = create(7);
 		ASSERT_THAT(dealIntoNewStack(d), testing::ElementsAre(6, 5, 4, 3, 2, 1, 0));
@@ -52,13 +54,13 @@ namespace
 		return newd;
 	}
 
-	TEST(Day22, cutNPositive)
+	TEST(NAME, cutNPositive)
 	{
 		deck d= create(7);
 		ASSERT_THAT(cutN(d, 3), testing::ElementsAre(3, 4, 5, 6, 0, 1, 2));
 	}
 
-	TEST(Day22, cutNNegative)
+	TEST(NAME, cutNNegative)
 	{
 		deck d=create(7);
 		ASSERT_THAT(cutN(d, -3), testing::ElementsAre(4, 5, 6, 0, 1, 2, 3));
@@ -75,7 +77,7 @@ namespace
 		return newd;
 	}
 
-	TEST(Day22, dealWithIncrementN)
+	TEST(NAME, dealWithIncrementN)
 	{
 		deck d= create(10);
 		ASSERT_THAT(dealWithIncrementN(d, 3), testing::ElementsAre(0, 7, 4, 1, 8, 5, 2, 9, 6, 3));
@@ -127,7 +129,7 @@ namespace
 		return shuffle(d, lines);
 	}
 
-	TEST(Day22, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		std::string input = R"(
 deal with increment 7
@@ -137,7 +139,7 @@ deal into new stack)";
 		ASSERT_THAT(processInput(input, 10), testing::ElementsAre(0, 3, 6, 9, 2, 5, 8, 1, 4, 7));
 	}
 
-	TEST(Day22, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		std::string input = R"(
 cut 6
@@ -147,7 +149,7 @@ deal into new stack)";
 		ASSERT_THAT(processInput(input, 10), testing::ElementsAre(3, 0, 7, 4, 1, 8, 5, 2, 9, 6));
 	}
 
-	TEST(Day22, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		std::string input = R"(
 deal with increment 7
@@ -157,7 +159,7 @@ cut -2)";
 		ASSERT_THAT(processInput(input, 10), testing::ElementsAre(6, 3, 0, 7, 4, 1, 8, 5, 2, 9));
 	}
 
-	TEST(Day22, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		std::string input = R"(
 deal into new stack
@@ -174,7 +176,7 @@ cut -1)";
 		ASSERT_THAT(processInput(input, 10), testing::ElementsAre(9, 2, 5, 8, 1, 4, 7, 0, 3, 6));
 	}
 
-	TEST(Day22, InputA)
+	TEST(NAME, InputA)
 	{
 		auto input = aoc::readInputFile("Day22.txt").str();
 		deck d = processInput(input, 10007);
@@ -185,7 +187,7 @@ cut -1)";
 		EXPECT_EQ(idx, 4703);
 	}
 
-	TEST(Day22, InputB)
+	TEST(NAME, InputB)
 	{
 		auto max = std::vector<int>().max_size();
 

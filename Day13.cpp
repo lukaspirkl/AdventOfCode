@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day13__Care_Package
+
 namespace
 {
 	int ai(std::vector<std::vector<int>>& screen)
@@ -22,7 +24,7 @@ namespace
 		else { return 1; }
 	}
 
-	TEST(Day13, InputA)
+	TEST(NAME, InputA)
 	{
 		aoc::intcode intcode(aoc::readInputFile("Day13.txt").str());
 		std::map<aoc::Coords, int> screen;
@@ -54,7 +56,7 @@ namespace
 		EXPECT_EQ(blockCount, 315);
 	}
 
-	TEST(Day13, InputB)
+	TEST(NAME, InputB)
 	{
 		auto input = aoc::splitLongLong(aoc::readInputFile("Day13.txt").str());
 		input[0] = 2;

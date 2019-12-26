@@ -2,7 +2,9 @@
 #include "aoc.h"
 #include "intcode.h"
 
-namespace
+#define NAME Day25__Cryostasis
+
+namespace 
 {
 	class computer
 	{
@@ -61,7 +63,7 @@ namespace
 		}
 	};
 
-	TEST(Day25, InputA)
+	TEST(NAME, InputA)
 	{
 		computer c;
 

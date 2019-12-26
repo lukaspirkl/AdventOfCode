@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#define NAME Day04__Secure_Container
+
 namespace
 {
 	void populate(size_t i, int* d)
@@ -12,7 +14,7 @@ namespace
 		d[5] = i % 10;
 	}
 
-	TEST(Day04, InputA)
+	TEST(NAME, InputA)
 	{
 		int count = 0;
 		for (size_t i = 147981; i < 691423; i++)
@@ -43,7 +45,7 @@ namespace
 		EXPECT_EQ(count, 1790);
 	}
 
-	TEST(Day04, InputB)
+	TEST(NAME, InputB)
 	{
 		int count = 0;
 		for (size_t i = 147981; i < 691423; i++)

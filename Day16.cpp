@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day16__Flawed_Frequency_Transmission
+
 namespace
 {
 
@@ -52,31 +54,31 @@ namespace
 		return ss.str();
 	}
 
-	TEST(Day16, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		auto nums = create("12345678");
 		EXPECT_EQ(calculate(nums, 4), "01029498");
 	}
 
-	TEST(Day16, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		auto nums = create("80871224585914546619083218645595");
 		EXPECT_EQ(calculate(nums, 100), "24176176");
 	}
 
-	TEST(Day16, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		auto nums = create("19617804207202209144916044189917");
 		EXPECT_EQ(calculate(nums, 100), "73745418");
 	}
 
-	TEST(Day16, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		auto nums = create("69317163492948606335995924319873");
 		EXPECT_EQ(calculate(nums, 100), "52432133");
 	}
 
-	TEST(Day16, InputA)
+	TEST(NAME, InputA)
 	{
 		auto nums = create(aoc::readInputFile("Day16.txt").str());
 		EXPECT_EQ(calculate(nums, 100), "44098263");
@@ -92,28 +94,28 @@ namespace
 		return megaNums;
 	}
 
-	TEST(Day16, ExampleB2)
+	TEST(NAME, ExampleB2)
 	{
 		FAIL() << "Slow as hell and maybe wrong";
 		auto nums = getMegaNums(create("03036732577212944063491565474664"));
 		EXPECT_EQ(calculate(nums, 100, 303673), "84462026");
 	}
 
-	TEST(Day16, ExampleB3)
+	TEST(NAME, ExampleB3)
 	{
 		FAIL() << "Slow as hell and maybe wrong";
 		auto nums = getMegaNums(create("02935109699940807407585447034323"));
 		EXPECT_EQ(calculate(nums, 100, 293510), "78725270");
 	}
 
-	TEST(Day16, ExampleB4)
+	TEST(NAME, ExampleB4)
 	{
 		FAIL() << "Slow as hell and maybe wrong";
 		auto nums = getMegaNums(create("03081770884921959731165446850517"));
 		EXPECT_EQ(calculate(nums, 100, 308177), "53553731");
 	}
 
-	TEST(Day16, InputB)
+	TEST(NAME, InputB)
 	{
 		FAIL() << "Slow as hell and maybe wrong";
 		auto nums = getMegaNums(create(aoc::readInputFile("Day16.txt").str()));

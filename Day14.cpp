@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include <regex>
 
+#define NAME Day14__Space_Stoichiometry
+
 namespace
 {
 	std::string large1 = R"(
@@ -183,7 +185,7 @@ namespace
 		return requirements["ORE"];
 	}
 
-	TEST(Day14, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		std::string input = R"(
 10 ORE => 10 A
@@ -198,7 +200,7 @@ namespace
 		EXPECT_EQ(calculateA(r), 31);
 	}
 
-	TEST(Day14, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		std::string input = R"(
 9 ORE => 2 A
@@ -214,35 +216,35 @@ namespace
 		EXPECT_EQ(calculateA(r), 165);
 	}
 
-	TEST(Day14, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		reactions r;
 		populate(r, large1);
 		EXPECT_EQ(calculateA(r), 13312);
 	}
 
-	TEST(Day14, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		reactions r;
 		populate(r, large2);
 		EXPECT_EQ(calculateA(r), 180697);
 	}
 
-	TEST(Day14, ExampleA5)
+	TEST(NAME, ExampleA5)
 	{
 		reactions r;
 		populate(r, large3);
 		EXPECT_EQ(calculateA(r), 2210736);
 	}
 
-	TEST(Day14, InputA)
+	TEST(NAME, InputA)
 	{
 		reactions r;
 		populate(r, aoc::readInputFile("Day14.txt").str());
 		EXPECT_EQ(calculateA(r), 378929);
 	}
 
-	TEST(Day14, InputB)
+	TEST(NAME, InputB)
 	{
 		reactions r;
 		populate(r, aoc::readInputFile("Day14.txt").str());

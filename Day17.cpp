@@ -2,9 +2,11 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day17__Set_and_Forget
+
 namespace
 {
-	TEST(Day17, InputA)
+	TEST(NAME, InputA)
 	{
 		auto input = aoc::splitLongLong(aoc::readInputFile("Day17.txt").str());
 		//input[0] = 2;
@@ -68,7 +70,7 @@ namespace
 		EXPECT_EQ(sum, 10064);
 	}
 
-	TEST(Day17, InputB)
+	TEST(NAME, InputB)
 	{
 		auto input = aoc::splitLongLong(aoc::readInputFile("Day17.txt").str());
 		input[0] = 2;

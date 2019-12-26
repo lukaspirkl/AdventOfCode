@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day15__Oxygen_System
+
 namespace
 {
 	struct oxygen
@@ -168,13 +170,13 @@ namespace
 		return foundOxygen;
 	}
 
-	TEST(Day15, InputA)
+	TEST(NAME, InputA)
 	{
 		std::vector<std::vector<int>> map(maxx, std::vector<int>(maxy, 0));
 		EXPECT_EQ(explore(map, false).distance, 252);
 	}
 
-	TEST(Day15, InputB)
+	TEST(NAME, InputB)
 	{
 		std::vector<std::vector<int>> map(maxx, std::vector<int>(maxy, 0));
 		oxygen o = explore(map, true);

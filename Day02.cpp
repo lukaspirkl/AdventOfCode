@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day02__Program_Alarm
+
 namespace
 {
 	std::string calculateA(std::string input)
@@ -24,37 +26,37 @@ namespace
 		return (int)intcode.getData()[0];
 	}
 
-	TEST(Day02, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		EXPECT_EQ(calculateA("1,9,10,3,2,3,11,0,99,30,40,50"), "3500,9,10,70,2,3,11,0,99,30,40,50");
 	}
 
-	TEST(Day02, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		EXPECT_EQ(calculateA("1,0,0,0,99"), "2,0,0,0,99");
 	}
 
-	TEST(Day02, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		EXPECT_EQ(calculateA("2,3,0,3,99"), "2,3,0,6,99");
 	}
 
-	TEST(Day02, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		EXPECT_EQ(calculateA("2,4,4,5,99,0"), "2,4,4,5,99,9801");
 	}
 
-	TEST(Day02, ExampleA5)
+	TEST(NAME, ExampleA5)
 	{
 		EXPECT_EQ(calculateA("1,1,1,4,99,5,6,0,99"), "30,1,1,4,2,5,6,0,99");
 	}
 
-	TEST(Day02, InputA)
+	TEST(NAME, InputA)
 	{
 		EXPECT_EQ(calculateB(12, 2), 3267740);
 	}
 
-	TEST(Day02, InputB)
+	TEST(NAME, InputB)
 	{
 		for (int noun = 0; noun <= 99; noun++)
 		{

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day01__The_Tyranny_of_the_Rocket_Equation
+
 namespace
 {
 	int calculateA(int input)
@@ -8,27 +10,27 @@ namespace
 		return (input / 3) - 2;
 	}
 
-	TEST(Day01, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		EXPECT_EQ(calculateA(12), 2);
 	}
 
-	TEST(Day01, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		EXPECT_EQ(calculateA(14), 2);
 	}
 
-	TEST(Day01, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		EXPECT_EQ(calculateA(1969), 654);
 	}
 
-	TEST(Day01, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		EXPECT_EQ(calculateA(100756), 33583);
 	}
 
-	TEST(Day01, InputA)
+	TEST(NAME, InputA)
 	{
 		std::stringstream input = aoc::readInputFile("Day01.txt");
 
@@ -55,22 +57,22 @@ namespace
 		return fuel;
 	}
 
-	TEST(Day01, ExampleB1)
+	TEST(NAME, ExampleB1)
 	{
 		EXPECT_EQ(calculateB(14), 2);
 	}
 
-	TEST(Day01, ExampleB2)
+	TEST(NAME, ExampleB2)
 	{
 		EXPECT_EQ(calculateB(1969), 966);
 	}
 
-	TEST(Day01, ExampleB3)
+	TEST(NAME, ExampleB3)
 	{
 		EXPECT_EQ(calculateB(100756), 50346);
 	}
 
-	TEST(Day01, InputB)
+	TEST(NAME, InputB)
 	{
 		std::stringstream input = aoc::readInputFile("Day01.txt");
 

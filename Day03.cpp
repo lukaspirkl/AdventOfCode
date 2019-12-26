@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day03__Crossed_Wires
+
 namespace
 {
 	std::vector<std::string> split(const std::string& s)
@@ -77,7 +79,7 @@ namespace
 		return calculate(input, [](std::pair<aoc::Coords, std::map<int, int>> pair) { return std::abs(pair.first.x) + std::abs(pair.first.y); });
 	}
 
-	TEST(Day03, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		const char* input = "R8,U5,L5,D3\nU7,R6,D4,L4";
 
@@ -87,7 +89,7 @@ namespace
 		EXPECT_EQ(calculateA(s), 6);
 	}
 
-	TEST(Day03, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		const char* input = "R75,D30,R83,U83,L12,D49,R71,U7,L72\nU62,R66,U55,R34,D71,R55,D58,R83";
 
@@ -97,7 +99,7 @@ namespace
 		EXPECT_EQ(calculateA(s), 159);
 	}
 
-	TEST(Day03, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		const char* input = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51\nU98,R91,D20,R16,D67,R40,U7,R15,U6,R7";
 
@@ -107,7 +109,7 @@ namespace
 		EXPECT_EQ(calculateA(s), 135);
 	}
 
-	TEST(Day03, InputA)
+	TEST(NAME, InputA)
 	{
 		auto input = aoc::readInputFile("Day03.txt");
 
@@ -126,7 +128,7 @@ namespace
 		});
 	}
 
-	TEST(Day03, ExampleB1)
+	TEST(NAME, ExampleB1)
 	{
 		const char* input = "R8,U5,L5,D3\nU7,R6,D4,L4";
 
@@ -136,7 +138,7 @@ namespace
 		EXPECT_EQ(calculateB(s), 30);
 	}
 
-	TEST(Day03, ExampleB2)
+	TEST(NAME, ExampleB2)
 	{
 		const char* input = "R75,D30,R83,U83,L12,D49,R71,U7,L72\nU62,R66,U55,R34,D71,R55,D58,R83";
 
@@ -146,7 +148,7 @@ namespace
 		EXPECT_EQ(calculateB(s), 610);
 	}
 
-	TEST(Day03, ExampleB3)
+	TEST(NAME, ExampleB3)
 	{
 		const char* input = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51\nU98,R91,D20,R16,D67,R40,U7,R15,U6,R7";
 
@@ -156,7 +158,7 @@ namespace
 		EXPECT_EQ(calculateB(s), 410);
 	}
 
-	TEST(Day03, InputB)
+	TEST(NAME, InputB)
 	{
 		auto input = aoc::readInputFile("Day03.txt");
 

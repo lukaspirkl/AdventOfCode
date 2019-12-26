@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day21__Springdroid_Adventure
+
 namespace
 {
 	/*
@@ -70,7 +72,7 @@ NOT X Y sets Y to true if X is false; otherwise, it sets Y to false.
 		return result;
 	}
 
-	TEST(Day21, InputA)
+	TEST(NAME, InputA)
 	{
 		std::string prg = "NOT A T\nAND D T\nOR T J\nNOT B T\nAND D T\nOR T J\nNOT C T\nAND D T\nOR T J\nWALK\n";
 		std::stringstream out;
@@ -79,7 +81,7 @@ NOT X Y sets Y to true if X is false; otherwise, it sets Y to false.
 		EXPECT_EQ(result, 19357180);
 	}
 
-	TEST(Day21, InputB)
+	TEST(NAME, InputB)
 	{
 		std::string prg = "NOT A T\nAND D T\nAND H T\nOR T J\nNOT B T\nAND D T\nAND H T\nOR T J\nNOT C T\nAND D T\nAND H T\nOR T J\nNOT A T\nOR T J\nRUN\n";
 		std::stringstream out;

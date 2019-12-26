@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day18__Many_Worlds_Interpretation
+
 namespace
 {
 	typedef std::vector<std::vector<char>> map;
@@ -168,7 +170,7 @@ namespace
 		return minDistance;
 	}
 
-	TEST(Day18, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		std::string in = R"(
 #########
@@ -178,7 +180,7 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 8);
 	}
 
-	TEST(Day18, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		std::string in = R"(
 ########################
@@ -190,7 +192,7 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 86);
 	}
 
-	TEST(Day18, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		std::string in = R"(
 ########################
@@ -202,7 +204,7 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 132);
 	}
 
-	TEST(Day18, DISABLED_ExampleA4)
+	TEST(NAME, DISABLED_ExampleA4)
 	{
 		std::string in = R"(
 #################
@@ -218,7 +220,7 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 136);
 	}
 
-	TEST(Day18, ExampleA5)
+	TEST(NAME, ExampleA5)
 	{
 		std::string in = R"(
 ########################
@@ -231,7 +233,7 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 81);
 	}
 
-	TEST(Day18, DISABLED_InputA)
+	TEST(NAME, DISABLED_InputA)
 	{
 		EXPECT_EQ(calculateMinDistance(aoc::readInputFile("Day18.txt").str()), 0);
 	}

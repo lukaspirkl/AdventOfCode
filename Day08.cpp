@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day08__Space_Image_Format
+
 namespace
 {
-	TEST(Day08, InputA)
+	TEST(NAME, InputA)
 	{
 		std::string input = aoc::readInputFile("Day08.txt").str();
 
@@ -35,7 +37,7 @@ namespace
 		EXPECT_EQ(oneCount * twoCount, 2250);
 	}
 
-	TEST(Day08, InputB)
+	TEST(NAME, InputB)
 	{
 		std::string input = aoc::readInputFile("Day08.txt").str();
 

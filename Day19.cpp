@@ -2,6 +2,8 @@
 #include "aoc.h"
 #include "intcode.h"
 
+#define NAME Day19__Tractor_Beam
+
 namespace
 {
 	int compute(std::vector<long long>& input, int x, int y, std::map<aoc::Coords, int>& cache)
@@ -33,7 +35,7 @@ namespace
 		return (int)intcode.io;
 	}
 
-	TEST(Day19, InputA)
+	TEST(NAME, InputA)
 	{
 		auto input = aoc::splitLongLong(aoc::readInputFile("Day19.txt").str());
 		std::map<aoc::Coords, int> cache;
@@ -53,7 +55,7 @@ namespace
 		EXPECT_EQ(count, 179);
 	}
 
-	TEST(Day19, InputB)
+	TEST(NAME, InputB)
 	{
 		auto input = aoc::splitLongLong(aoc::readInputFile("Day19.txt").str());
 		std::map<aoc::Coords, int> cache;

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day10__Monitoring_Station
+
 namespace
 {
 	std::string largeOne = R"(
@@ -209,24 +211,24 @@ namespace
 		return best;
 	}
 
-	TEST(Day10, AngleUp)
+	TEST(NAME, AngleUp)
 	{
 		EXPECT_EQ(calculateAngle(Coords{ 0, -1 }), 0);
 	}
-	TEST(Day10, AngleRight)
+	TEST(NAME, AngleRight)
 	{
 		EXPECT_EQ(calculateAngle(Coords{ 1, 0 }), 90);
 	}
-	TEST(Day10, AngleDown)
+	TEST(NAME, AngleDown)
 	{
 		EXPECT_EQ(calculateAngle(Coords{ 0, 1 }), 180);
 	}
-	TEST(Day10, AngleLeft)
+	TEST(NAME, AngleLeft)
 	{
 		EXPECT_EQ(calculateAngle(Coords{ -1, 0 }), 270);
 	}
 
-	TEST(Day10, ExampleA0)
+	TEST(NAME, ExampleA0)
 	{
 		std::string map = R"(
 .7..7
@@ -241,7 +243,7 @@ namespace
 		EXPECT_EQ(countVisible(Coords{ 3,4 }, asteroids), 8);
 	}
 
-	TEST(Day10, ExampleA1)
+	TEST(NAME, ExampleA1)
 	{
 		std::string map = R"(
 ......#.#.
@@ -259,7 +261,7 @@ namespace
 		EXPECT_EQ(bestCountVisible(asteroids), 33);
 	}
 
-	TEST(Day10, ExampleA2)
+	TEST(NAME, ExampleA2)
 	{
 		std::string map = R"(
 #.#...#.#.
@@ -277,7 +279,7 @@ namespace
 		EXPECT_EQ(bestCountVisible(asteroids), 35);
 	}
 
-	TEST(Day10, ExampleA3)
+	TEST(NAME, ExampleA3)
 	{
 		std::string map = R"(
 .#..#..###
@@ -295,21 +297,21 @@ namespace
 		EXPECT_EQ(bestCountVisible(asteroids), 41);
 	}
 
-	TEST(Day10, ExampleA4)
+	TEST(NAME, ExampleA4)
 	{
 		std::set<Coords> asteroids;
 		populate(asteroids, largeOne);
 		EXPECT_EQ(bestCountVisible(asteroids), 210);
 	}
 
-	TEST(Day10, InputA)
+	TEST(NAME, InputA)
 	{
 		std::set<Coords> asteroids;
 		populate(asteroids, input);
 		EXPECT_EQ(bestCountVisible(asteroids), 267);
 	}
 
-	TEST(Day10, ExampleB1)
+	TEST(NAME, ExampleB1)
 	{
 		std::set<Coords> asteroids;
 		populate(asteroids, largeOne);
@@ -317,7 +319,7 @@ namespace
 		EXPECT_EQ((the200th.x * 100) + the200th.y, 802);
 	}
 
-	TEST(Day10, InputB)
+	TEST(NAME, InputB)
 	{
 		std::set<Coords> asteroids;
 		populate(asteroids, input);

@@ -3,6 +3,8 @@
 #include <regex>
 #include <numeric> 
 
+#define NAME Day12__The_N_Body_Problem
+
 namespace
 {
 	struct Coords
@@ -66,7 +68,7 @@ namespace
 		}
 	}
 
-	TEST(Day12, InputA)
+	TEST(NAME, InputA)
 	{
 		std::string input = R"(
 <x=-19, y=-4, z=2>
@@ -91,7 +93,7 @@ namespace
 		EXPECT_EQ(sum, 8287);
 	}
 
-	TEST(Day12, InputB)
+	TEST(NAME, InputB)
 	{
 		std::string input = R"(
 <x=-19, y=-4, z=2>
