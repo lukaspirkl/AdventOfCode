@@ -77,6 +77,7 @@
     <ClCompile Include="Day21.cpp" />
     <ClCompile Include="Day22.cpp" />
     <ClCompile Include="Day23.cpp" />
+    <ClCompile Include="Day24.cpp" />
     <ClCompile Include="Day25.cpp" />
     <ClCompile Include="intcode.cpp" />
     <ClCompile Include="pch.cpp">
