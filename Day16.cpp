@@ -16,15 +16,96 @@ namespace
 		return nums;
 	}
 
+	// 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14
+	// 1  0 -1  0  1  0 -1  0  1  0 -1  0  1  0 -1  
+	// + = 0  4  8 12 ->  +0(+4)
+	// - = 2  6 10 14 ->  +2(+4)
+
+	// 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22
+	// 0  1  1  0  0 -1 -1  0  0  1  1  0  0 -1 -1  0  0  1  1  0  0 -1 -1
+	// + = 1  2  9 10 17 18 ->  +1(+1+7)
+	// - = 5  6 13 14 21 22 ->  +5(+1+7)
+
+	// 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
+	// 0  0  1  1  1  0  0  0 -1 -1 -1  0  0  0  1  1  1
+	// + = 2  3  4 14 15 16 ->  +2(+1+1+10)
+	// - = 8  9 10 20 21 22 ->  +8(+1+1+10)
+
+	// 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22
+	// 0  0  0  1  1  1  1  0  0  0  0 -1 -1 -1 -1  0  0  0  0  1  1  1  1
+	// ->  +3(+1+1+1+13)
+	// -> +11(+1+1+1+13)
+
+	// ->  +4(+1+1+1+1+16)
+	// -> +14(+1+1+1+1+16)
+
+	// x = 4
+	// +[i] ( (+[1])i +[4+i*] )untilend
+	
+
+
 	std::string calculate(std::vector<int> nums, int phases, int offset = 0)
 	{
 		std::vector<int> pattern{ 0, 1 , 0 , -1 };
 
 		for (size_t phase = 0; phase < phases; phase++)
 		{
+			size_t x = 4;
 			std::vector<int> newNums;
 			for (size_t i = 0; i < nums.size(); i++)
-			{
+			{	
+				size_t idx = i;
+				int sum = nums[idx];
+				if (i == 0)
+				{
+					if ((idx + x - 2) < nums.size())
+					{
+						sum -= nums[idx + x - 2];
+					}
+					while (idx < nums.size())
+					{
+						idx += x;
+						if (idx < nums.size())
+						{
+							sum += nums[idx];
+						}
+						if ((idx + x - 2) < nums.size())
+						{
+							sum -= nums[idx + x - 2];
+						}
+					}
+				}
+				else
+				{
+					if ((idx + x - 3) < nums.size())
+					{
+						sum -= nums[idx + x - 3];
+					}
+					while (idx < nums.size())
+					{
+						for (size_t j = 0; j < i && idx + 1 < nums.size(); j++)
+						{
+							idx += 1;
+							sum += nums[idx];
+							if ((idx + x - 3) < nums.size())
+							{
+								sum -= nums[idx + x - 3];
+							}
+						}
+						idx += x;
+						if (idx < nums.size())
+						{
+							sum += nums[idx];
+						}
+						if ((idx + x - 3) < nums.size())
+						{
+							sum -= nums[idx + x - 3];
+						}
+					}
+				}
+				x += 3;
+				/*
+				int sum2 = 0;
 				std::vector<int> p;
 				for (size_t j = 0; true; j++)
 				{
@@ -36,11 +117,11 @@ namespace
 					if (p.size() >= nums.size() + 1) { break; }
 				}
 
-				int sum = 0;
 				for (size_t j = 0; j < nums.size(); j++)
 				{
-					sum += nums[j] * p[j + 1];
+					sum2 += nums[j] * p[j + 1];
 				}
+				*/
 				newNums.push_back(std::abs(sum) % 10);
 			}
 			nums = newNums;
@@ -78,6 +159,7 @@ namespace
 		EXPECT_EQ(calculate(nums, 100), "52432133");
 	}
 
+	//Original time: 11sec
 	TEST(NAME, InputA)
 	{
 		auto nums = create(aoc::readInputFile("Day16.txt").str());
