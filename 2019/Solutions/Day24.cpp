@@ -158,7 +158,7 @@ namespace
 		return multimap{ { 0, create(input) } };
 	}
 
-	
+	/*
 	bool get(const multimap& m, const int& layer, const size_t& x, const size_t& y)
 	{
 		if (x < 0 || y < 0 || y >= 5 || x >= 5)
@@ -181,5 +181,5 @@ namespace
 		if (get(m, x, y - 1)) { adjacentBugs++; }
 		return adjacentBugs;
 	}
-	
+	*/
 }

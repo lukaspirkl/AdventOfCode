@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "aoc.h"
 
 namespace aoc

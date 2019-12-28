@@ -1,5 +1,10 @@
 #pragma once
-#include "pch.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <queue>
+#include <iterator>
 
 namespace aoc
 {

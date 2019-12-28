@@ -1,5 +1,4 @@
 #pragma once
-#include "pch.h"
 #include "aoc.h"
 
 namespace aoc
@@ -27,7 +26,7 @@ namespace aoc
 
 		intcode(std::vector<long long> data);
 		intcode(const std::string& data);
-		
+
 		std::vector<long long> getData();
 		int getInstruction();
 		void run(long long input, std::vector<long long>& output = std::vector<long long>());
