@@ -50,12 +50,12 @@ set(inputs
     Day25.txt
 )
 
-list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
-
-add_executable(Year2019 ${sources})
+add_executable(Year2019 ${sources} ${inputs})
 target_precompile_headers(Year2019 PRIVATE pch.h)
 target_compile_features(Year2019 PRIVATE cxx_std_17)
 target_link_libraries(Year2019 aoc gtest::gtest)
+
+list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
 add_custom_command(TARGET Year2019 POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy ${inputs} $<TARGET_FILE_DIR:Year2019>
