@@ -1,7 +1,8 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "aoc.h"
 #include "gmock/gmock.h"
 #include <regex>
+#include "boost/multiprecision/cpp_int.hpp"
 
 #define NAME Day22__Slam_Shuffle
 
@@ -56,13 +57,13 @@ namespace
 
 	TEST(NAME, cutNPositive)
 	{
-		deck d= create(7);
+		deck d = create(7);
 		ASSERT_THAT(cutN(d, 3), testing::ElementsAre(3, 4, 5, 6, 0, 1, 2));
 	}
 
 	TEST(NAME, cutNNegative)
 	{
-		deck d=create(7);
+		deck d = create(7);
 		ASSERT_THAT(cutN(d, -3), testing::ElementsAre(4, 5, 6, 0, 1, 2, 3));
 	}
 
@@ -79,7 +80,7 @@ namespace
 
 	TEST(NAME, dealWithIncrementN)
 	{
-		deck d= create(10);
+		deck d = create(10);
 		ASSERT_THAT(dealWithIncrementN(d, 3), testing::ElementsAre(0, 7, 4, 1, 8, 5, 2, 9, 6, 3));
 	}
 
@@ -187,19 +188,77 @@ cut -1)";
 		EXPECT_EQ(idx, 4703);
 	}
 
+
+	// SECOND PART 
+	// Implementation based on this following tutorial as this fancy math is beyond what I want to know. 
+	// https://github.com/mebeim/aoc/blob/master/2019/README.md#day-22---slam-shuffle
+
+	namespace mp = boost::multiprecision;
+
+	mp::int256_t modulo(mp::int256_t x, mp::int256_t m) {
+		return (x % m + m) % m;
+	}
+
+	template <typename T>
+	T modpow(T base, T exp, T modulus) {
+		base %= modulus;
+		T result = 1;
+		while (exp > 0) {
+			if (exp & 1) result = (result * base) % modulus;
+			base = (base * base) % modulus;
+			exp >>= 1;
+		}
+		return result;
+	}
+
+	void transform(mp::int256_t& start, mp::int256_t& step, mp::int256_t& size, std::vector<std::string>& lines)
+	{
+		for (size_t i = 0; i < lines.size(); i++)
+		{
+			std::smatch match;
+
+			if (std::regex_search(lines[i], match, std::regex(R"(cut ([\-0-9]*))")) && match.size() > 1)
+			{
+				mp::int256_t n = std::stoi(match.str(1));
+				start += n * step;
+			}
+			else if (std::regex_search(lines[i], match, std::regex(R"(deal with increment ([0-9]*))")) && match.size() > 1)
+			{
+				mp::int256_t n = std::stoi(match.str(1));
+				step *= modpow(n, size - 2, size);
+			}
+			else
+			{
+				step *= -1;
+				start += step;
+			}
+
+			start = modulo(start, size);
+			step = modulo(step, size);
+		}
+	}
+
+	void repeat(mp::int256_t& start, mp::int256_t& step, mp::int256_t& size, mp::int256_t& repetitions)
+	{
+		mp::int256_t final_step = modpow(step, repetitions, size);
+		mp::int256_t final_start = modulo((start * (1 - final_step) * modpow(modulo((1 - step), size), size - 2, size)), size);
+		start = final_start;
+		step = final_step;
+	}
+
 	TEST(NAME, InputB)
 	{
-		auto max = std::vector<int>().max_size();
-
 		auto input = aoc::readInputFile("Day22.txt").str();
-		
 		auto lines = split(input);
-		deck d = create(119315717514047);
-		for (size_t i = 0; i < 101741582076661; i++)
-		{
-			d = shuffle(d, lines);
-		}
 
-		EXPECT_EQ(d[2020], 0);
+		mp::int256_t start = 0;
+		mp::int256_t step = 1;
+		mp::int256_t size = 119315717514047;
+		mp::int256_t repetitions = 101741582076661;
+
+		transform(start, step, size, lines);
+		repeat(start, step, size, repetitions);
+
+		EXPECT_EQ(modulo((start + step * 2020), size), 55627600867625);
 	}
 }

@@ -1,5 +1,6 @@
 
 find_package(gtest REQUIRED)
+find_package(boost REQUIRED)
 
 set(sources
     pch.h
@@ -53,7 +54,7 @@ set(inputs
 add_executable(Year2019 ${sources} ${inputs})
 target_precompile_headers(Year2019 PRIVATE pch.h)
 target_compile_features(Year2019 PRIVATE cxx_std_17)
-target_link_libraries(Year2019 aoc gtest::gtest)
+target_link_libraries(Year2019 aoc gtest::gtest boost::boost)
 
 list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
