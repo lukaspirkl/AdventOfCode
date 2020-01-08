@@ -24,7 +24,7 @@ namespace aoc
 
 		long long io;
 
-		intcode(std::vector<long long> data);
+		intcode(const std::vector<long long>& data);
 		intcode(const std::string& data);
 
 		std::vector<long long> getData();

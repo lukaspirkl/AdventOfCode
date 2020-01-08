@@ -206,6 +206,7 @@ namespace
 
 	TEST(NAME, DISABLED_ExampleA4)
 	{
+		//TODO: Unable to solve by current approach
 		std::string in = R"(
 #################
 #i.G..c...e..H.p#
@@ -233,8 +234,14 @@ namespace
 		EXPECT_EQ(calculateMinDistance(in), 81);
 	}
 
-	TEST(NAME, DISABLED_InputA)
+	TEST(NAME, InputA)
 	{
+		FAIL() << "TODO: Solve this";
 		EXPECT_EQ(calculateMinDistance(aoc::readInputFile("Day18.txt").str()), 0);
+	}
+
+	TEST(NAME, InputB)
+	{
+		FAIL() << "TODO: Solve this";
 	}
 }

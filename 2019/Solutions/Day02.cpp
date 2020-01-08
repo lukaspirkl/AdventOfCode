@@ -6,7 +6,7 @@
 
 namespace
 {
-	std::string calculateA(std::string input)
+	std::string calculateA(const std::string& input)
 	{
 		std::vector<long long> data = aoc::splitLongLong(input);
 		aoc::intcode intcode(data);

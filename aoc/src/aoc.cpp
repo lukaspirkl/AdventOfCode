@@ -2,7 +2,7 @@
 
 namespace aoc
 {
-	std::stringstream readInputFile(std::string fileName)
+	std::stringstream readInputFile(const std::string& fileName)
 	{
 		std::ifstream t(fileName);
 		std::stringstream buffer;
@@ -34,7 +34,7 @@ namespace aoc
 		return tokens;
 	}
 
-	std::string join(std::vector<long long> data)
+	std::string join(const std::vector<long long>& data)
 	{
 		std::stringstream result;
 		std::copy(data.begin(), data.end(), std::ostream_iterator<long long>(result, ","));

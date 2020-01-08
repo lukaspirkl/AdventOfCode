@@ -2,7 +2,7 @@
 
 namespace aoc
 {
-	intcode::intcode(std::vector<long long> data)
+	intcode::intcode(const std::vector<long long>& data)
 	{
 		this->originalDataSize = data.size();
 		this->data = std::vector<long long>(100000);
