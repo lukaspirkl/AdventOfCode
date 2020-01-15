@@ -1,247 +1,192 @@
 #include "pch.h"
 #include "aoc.h"
+#include <bitset>
 
 #define NAME Day18__Many_Worlds_Interpretation
 
 namespace
 {
-	typedef std::vector<std::vector<char>> map;
+	// Taken from https://github.com/FirescuOvidiu/Advent-of-Code-2019/tree/master/Day%2018
 
-	struct coords
+	const int letters = 26;
+
+
+	class Coordinate
 	{
-		size_t x;
-		size_t y;
+	public:
+		Coordinate(int x = 0, int y = 0, int steps = 0, long long visited = 0) : x(x), y(y), steps(steps), visited(visited) {}
+
+	public:
+		size_t x, y;
+		int steps;
+		long long visited;
 	};
 
-	struct foundKey
+	void readInput(std::fstream& in, std::vector<std::vector<char>>& map, Coordinate& startCoordinate)
 	{
-		char id;
-		coords coords;
-		size_t distance;
-	};
+		std::vector<char> v;
+		std::string line;
 
-	struct state
-	{
-		map map;
-		coords start;
-		size_t distance;
-	};
-
-	map read(const std::string& s)
-	{
-		map map;
-		map.push_back(std::vector<char>());
-		for (char ch : s)
+		while (std::getline(in, line))
 		{
-			if ((ch == '\n' || ch == '\r'))
+			for (int i = 0; i < line.size(); i++)
 			{
-				if (map.back().size() != 0)
+				v.push_back(line[i]);
+				if (v[i] == '@')
 				{
-					map.push_back(std::vector<char>());
+					startCoordinate.x = map.size();
+					startCoordinate.y = i;
+					v[i] = '.';
 				}
 			}
-			else
-			{
-				map.back().push_back(ch);
-			}
+			map.push_back(v);
+			v.clear();
 		}
-		return map;
 	}
 
-	coords find(const map& map, const char ch)
+	void readInput2(std::fstream& in, std::vector<std::vector<char>>& map, std::vector<Coordinate>& startCoordinates)
 	{
-		for (size_t y = 0; y < map.size(); y++)
+		std::vector<char> v;
+		std::string line;
+		Coordinate startCoordinate;
+
+		while (std::getline(in, line))
 		{
-			for (size_t x = 0; x < map[y].size(); x++)
+			for (int i = 0; i < line.size(); i++)
 			{
-				if (map[y][x] == ch)
+				v.push_back(line[i]);
+				if (v[i] == '@')
 				{
-					return coords{ x,y };
+					startCoordinate.x = map.size();
+					startCoordinate.y = i;
+					v[i] = '#';
 				}
 			}
+			map.push_back(v);
+			v.clear();
 		}
-		throw std::exception("Char not found.");
+
+		map[startCoordinate.x - 1][startCoordinate.y] = '#';
+		map[startCoordinate.x][startCoordinate.y - 1] = '#';
+		map[startCoordinate.x][startCoordinate.y + 1] = '#';
+		map[startCoordinate.x + 1][startCoordinate.y] = '#';
+		map[startCoordinate.x - 1][startCoordinate.y - 1] = '@';
+		map[startCoordinate.x - 1][startCoordinate.y + 1] = '@';
+		map[startCoordinate.x + 1][startCoordinate.y - 1] = '@';
+		map[startCoordinate.x + 1][startCoordinate.y + 1] = '@';
+		startCoordinates.push_back(Coordinate(startCoordinate.x - 1, startCoordinate.y - 1));
+		startCoordinates.push_back(Coordinate(startCoordinate.x - 1, startCoordinate.y + 1));
+		startCoordinates.push_back(Coordinate(startCoordinate.x + 1, startCoordinate.y - 1));
+		startCoordinates.push_back(Coordinate(startCoordinate.x + 1, startCoordinate.y + 1));
 	}
 
-	std::vector<foundKey> reachable(const state& s)
+
+	bool checkInMap(int x, int y, int lines, int columns)
 	{
-		map m(s.map);
-		m[s.start.y][s.start.x] = '@';
-		map mNext(m);
-		std::vector<foundKey> keys;
-		bool wayToGo = true;
-		size_t steps = 0;
-		while (wayToGo)
+		return x >= 0 && y >= 0 && x < lines && y < columns;
+	}
+
+
+	int BFS(const std::vector<std::vector<char>>& map, const Coordinate& startCoordinate)
+	{
+		std::set<std::tuple<int, int, long long>> repeated;
+		std::vector<int> dirX{ -1,0,0,1 };
+		std::vector<int> dirY{ 0,-1,1,0 };
+		std::bitset<letters> auxVisited;
+		std::queue<Coordinate> q;
+		Coordinate curr;
+
+		q.push(startCoordinate);
+		while (!q.empty())
 		{
-			steps++;
-			wayToGo = false;
-			for (size_t y = 1; y < m.size() - 1; y++)
+			curr = q.front();
+			q.pop();
+			auxVisited = curr.visited;
+
+			if (auxVisited.all())
 			{
-				for (size_t x = 1; x < m[y].size() - 1; x++)
+				return curr.steps;
+			}
+
+			for (int i = 0; i < 4; i++)
+			{
+				if ((!checkInMap(curr.x, curr.y, map.size(), map[0].size()))
+					|| (map[curr.x + dirX[i]][curr.y + dirY[i]] == '#')
+					|| repeated.find(std::make_tuple(curr.x + dirX[i], curr.y + dirY[i], curr.visited)) != repeated.end())
 				{
-					if (m[y][x] == '@')
-					{
-						if (m[y + 1][x] == '.') { mNext[y + 1][x] = '@'; wayToGo = true; }
-						if (m[y - 1][x] == '.') { mNext[y - 1][x] = '@'; wayToGo = true; }
-						if (m[y][x + 1] == '.') { mNext[y][x + 1] = '@'; wayToGo = true; }
-						if (m[y][x - 1] == '.') { mNext[y][x - 1] = '@'; wayToGo = true; }
-						if (m[y + 1][x] >= 'a') { keys.push_back(foundKey{ m[y + 1][x], coords{x, y + 1}, steps }); mNext[y + 1][x] = '#'; }
-						if (m[y - 1][x] >= 'a') { keys.push_back(foundKey{ m[y - 1][x], coords{x, y - 1}, steps }); mNext[y - 1][x] = '#'; }
-						if (m[y][x + 1] >= 'a') { keys.push_back(foundKey{ m[y][x + 1], coords{x + 1, y}, steps }); mNext[y][x + 1] = '#'; }
-						if (m[y][x - 1] >= 'a') { keys.push_back(foundKey{ m[y][x - 1], coords{x - 1, y}, steps }); mNext[y][x - 1] = '#'; }
-					}
+					continue;
 				}
-			}
-			m = mNext;
-		}
-		return keys;
-	}
 
-	void replace(map& map, const char& from, const char& to)
-	{
-		for (size_t y = 0; y < map.size(); y++)
-		{
-			for (size_t x = 0; x < map[y].size(); x++)
-			{
-				if (map[y][x] == from)
+				if (isupper(map[curr.x + dirX[i]][curr.y + dirY[i]])
+					&& (!auxVisited[map[curr.x + dirX[i]][curr.y + dirY[i]] - 'A']))
 				{
-					map[y][x] = to;
+					continue;
 				}
-			}
-		}
-	}
 
-	std::string inspect(const map& map)
-	{
-		std::stringstream ss;
-		for (size_t y = 0; y < map.size(); y++)
-		{
-			for (size_t x = 0; x < map[y].size(); x++)
-			{
-				ss << map[y][x];
-			}
-			ss << '\n';
-		}
-		std::string s = ss.str();
-		return s;
-	}
-
-	void update(state& s, const foundKey& key)
-	{
-		s.distance += key.distance;
-		s.start = key.coords;
-		replace(s.map, key.id, '.');
-		replace(s.map, key.id - ('a' - 'A'), '.');
-	}
-
-	size_t calculateMinDistance(const std::string& in)
-	{
-		map map = read(in);
-		coords start = find(map, '@');
-		replace(map, '@', '.');
-
-		std::vector<state> states;
-		states.push_back(state{ map, start, 0 });
-		
-		size_t minDistance = std::numeric_limits<int>::max();
-		
-		while (!states.empty())
-		{
-			state s{ states.back() };
-			states.pop_back();
-			auto keys = reachable(s);
-			if (keys.size() == 0)
-			{
-				minDistance = std::min(minDistance, s.distance);
-			}
-			else
-			{
-				for (auto& key : keys)
+				if (islower(map[curr.x + dirX[i]][curr.y + dirY[i]]))
 				{
-					state newState{ s };
-					update(newState, key);
-					if (newState.distance < minDistance)
-					{
-						states.push_back(newState);
-					}
+					auxVisited[map[curr.x + dirX[i]][curr.y + dirY[i]] - 'a'] = true;
+				}
+
+				q.push(Coordinate(curr.x + dirX[i], curr.y + dirY[i], curr.steps + 1, auxVisited.to_ullong()));
+				repeated.insert(std::make_tuple(curr.x + dirX[i], curr.y + dirY[i], auxVisited.to_ullong()));
+
+				if (islower(map[curr.x + dirX[i]][curr.y + dirY[i]]))
+				{
+					auxVisited[map[curr.x + dirX[i]][curr.y + dirY[i]] - 'a'] = false;
 				}
 			}
 		}
-		return minDistance;
 	}
 
-	TEST(NAME, ExampleA1)
+	void ignoreDoors(const std::vector<std::vector<char>>& map, std::vector<std::bitset<letters>>& visitedStart, const std::vector<Coordinate>& startCoordinates)
 	{
-		std::string in = R"(
-#########
-#b.A.@.a#
-#########)";
-
-		EXPECT_EQ(calculateMinDistance(in), 8);
-	}
-
-	TEST(NAME, ExampleA2)
-	{
-		std::string in = R"(
-########################
-#f.D.E.e.C.b.A.@.a.B.c.#
-######################.#
-#d.....................#
-########################)";
-
-		EXPECT_EQ(calculateMinDistance(in), 86);
-	}
-
-	TEST(NAME, ExampleA3)
-	{
-		std::string in = R"(
-########################
-#...............b.C.D.f#
-#.######################
-#.....@.a.B.c.d.A.e.F.g#
-########################)";
-
-		EXPECT_EQ(calculateMinDistance(in), 132);
-	}
-
-	TEST(NAME, DISABLED_ExampleA4)
-	{
-		//TODO: Unable to solve by current approach
-		std::string in = R"(
-#################
-#i.G..c...e..H.p#
-########.########
-#j.A..b...f..D.o#
-########@########
-#k.E..a...g..B.n#
-########.########
-#l.F..d...h..C.m#
-#################)";
-
-		EXPECT_EQ(calculateMinDistance(in), 136);
-	}
-
-	TEST(NAME, ExampleA5)
-	{
-		std::string in = R"(
-########################
-#@..............ac.GI.b#
-###d#e#f################
-###A#B#C################
-###g#h#i################
-########################)";
-
-		EXPECT_EQ(calculateMinDistance(in), 81);
+		for (int x = 0; x < map.size(); x++)
+		{
+			for (int y = 0; y < map[0].size(); y++)
+			{
+				if (islower(map[x][y]))
+				{
+					visitedStart[0][map[x][y] - 'a'] = !((x <= startCoordinates[0].x) && (y <= startCoordinates[0].y));
+					visitedStart[1][map[x][y] - 'a'] = !((x <= startCoordinates[1].x) && (y >= startCoordinates[1].y));
+					visitedStart[2][map[x][y] - 'a'] = !((x >= startCoordinates[2].x) && (y <= startCoordinates[2].y));
+					visitedStart[3][map[x][y] - 'a'] = !((x >= startCoordinates[3].x) && (y >= startCoordinates[3].y));
+				}
+			}
+		}
 	}
 
 	TEST(NAME, InputA)
 	{
-		FAIL() << "TODO: Solve this";
-		EXPECT_EQ(calculateMinDistance(aoc::readInputFile("Day18.txt").str()), 0);
-	}
+		std::fstream in("Day18.txt", std::fstream::in);
+		std::vector<std::vector<char>> map;
+		Coordinate startCoordinate;
 
+		readInput(in, map, startCoordinate);
+		in.close();
+
+		EXPECT_EQ(BFS(map, startCoordinate), 4868);
+	}
+	
 	TEST(NAME, InputB)
 	{
-		FAIL() << "TODO: Solve this";
+		std::fstream in("Day18.txt", std::fstream::in);
+		std::vector<std::vector<char>> map;
+		std::vector<std::bitset<letters>> visitedStart(4);
+		std::vector<Coordinate> startCoordinates;
+
+		readInput2(in, map, startCoordinates);
+		in.close();
+
+		ignoreDoors(map, visitedStart, startCoordinates);
+
+		int fewestSteps = 0;
+		for (int i = 0; i < 4; i++)
+		{
+			startCoordinates[i].visited = visitedStart[i].to_ullong();
+			fewestSteps += BFS(map, startCoordinates[i]);
+		}
+
+		EXPECT_EQ(fewestSteps, 1984);
 	}
 }
