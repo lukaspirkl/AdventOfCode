@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "aoc.h"
 
+#define NAME Day01__Report_Repair
+
 namespace
 {
-	TEST(Day01, InputA)
+	TEST(NAME, InputA)
 	{
 		auto input = aoc::readInputFile("Day01.txt");
 
@@ -29,7 +31,7 @@ namespace
 		EXPECT_FALSE(true);
 	}
 
-	TEST(Day01, InputB)
+	TEST(NAME, InputB)
 	{
 		auto input = aoc::readInputFile("Day01.txt");
 
@@ -58,6 +60,4 @@ namespace
 		}
 		EXPECT_FALSE(true);
 	}
-
-
 }
