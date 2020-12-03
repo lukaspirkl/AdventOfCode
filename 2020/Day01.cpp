@@ -2,6 +2,7 @@
 #include "aoc.h"
 
 #define NAME Day01__Report_Repair
+// https://adventofcode.com/2020/day/1
 
 namespace
 {
