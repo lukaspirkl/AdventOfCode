@@ -89,7 +89,7 @@ namespace
 
 	int BFS(const std::vector<std::vector<char>>& map, const Coordinate& startCoordinate)
 	{
-		std::set<std::tuple<int, int, long long>> repeated;
+		std::set<std::tuple<size_t, size_t, unsigned long long>> repeated;
 		std::vector<int> dirX{ -1,0,0,1 };
 		std::vector<int> dirY{ 0,-1,1,0 };
 		std::bitset<letters> auxVisited;
@@ -137,6 +137,7 @@ namespace
 				}
 			}
 		}
+		return -1;
 	}
 
 	void ignoreDoors(const std::vector<std::vector<char>>& map, std::vector<std::bitset<letters>>& visitedStart, const std::vector<Coordinate>& startCoordinates)
@@ -167,7 +168,7 @@ namespace
 
 		EXPECT_EQ(BFS(map, startCoordinate), 4868);
 	}
-	
+
 	TEST(NAME, InputB)
 	{
 		std::fstream in("Day18.txt", std::fstream::in);
