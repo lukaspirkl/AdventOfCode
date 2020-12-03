@@ -2,7 +2,7 @@
 My code to solve puzzles for [Advent of Code](https://adventofcode.com/).
 
 This code is continuous work in progress as I am using it to learn C++ and
-related tools ([CMake](https://cmake.org/), [Conan](https://conan.io/)).
+related tools ([CMake](https://cmake.org/)).
 Solutions to individual puzzles are written as a unit tests
 ([GTest](https://github.com/google/googletest)) and when a puzzle is
 somehow interesting to play with the executable is provided

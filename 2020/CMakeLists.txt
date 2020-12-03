@@ -1,8 +1,7 @@
-
-find_package(gtest REQUIRED)
+project(Year2020Tests LANGUAGES CXX)
 
 set(sources
-    pch.h
+    Main.cpp
     Day01.cpp
     Day02.cpp
 )
@@ -14,14 +13,14 @@ set(inputs
 
 list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
-add_executable(Year2020 ${sources} ${inputs})
-target_precompile_headers(Year2020 PRIVATE pch.h)
-target_compile_features(Year2020 PRIVATE cxx_std_17)
-target_link_libraries(Year2020 aoc gtest::gtest)
+add_executable(${PROJECT_NAME} ${sources} ${inputs})
+target_precompile_headers(${PROJECT_NAME} PRIVATE pch.h)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_link_libraries(${PROJECT_NAME} aoc gtest)
 
-add_custom_command(TARGET Year2020 POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${inputs} $<TARGET_FILE_DIR:Year2020>
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${inputs} $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
 enable_testing()
-add_test(Year2020 Year2020)
+add_test(${PROJECT_NAME} ${PROJECT_NAME})

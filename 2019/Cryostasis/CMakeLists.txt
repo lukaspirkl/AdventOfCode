@@ -1,2 +1,4 @@
-add_executable(cryostasis main.cpp)
-target_link_libraries(cryostasis aoc)
+project(Cryostasis LANGUAGES CXX)
+
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} aoc)

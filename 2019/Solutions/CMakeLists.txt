@@ -1,9 +1,7 @@
-
-find_package(gtest REQUIRED)
-find_package(boost REQUIRED)
+project(Year2019Tests LANGUAGES CXX)
 
 set(sources
-    pch.h
+    Main.cpp
     Day01.cpp
     Day02.cpp
     Day03.cpp
@@ -51,16 +49,18 @@ set(inputs
     Day25.txt
 )
 
-add_executable(Year2019 ${sources} ${inputs})
-target_precompile_headers(Year2019 PRIVATE pch.h)
-target_compile_features(Year2019 PRIVATE cxx_std_17)
-target_link_libraries(Year2019 aoc gtest::gtest boost::boost)
-
 list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
-add_custom_command(TARGET Year2019 POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${inputs} $<TARGET_FILE_DIR:Year2019>
+add_executable(${PROJECT_NAME} ${sources} ${inputs})
+target_precompile_headers(${PROJECT_NAME} PRIVATE pch.h)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+target_link_libraries(${PROJECT_NAME} aoc gtest gmock)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${inputs} $<TARGET_FILE_DIR:${PROJECT_NAME}>
 )
 
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../vendor/boost)
+
 enable_testing()
-add_test(Year2019 Year2019)
+add_test(${PROJECT_NAME} ${PROJECT_NAME})

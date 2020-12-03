@@ -2,7 +2,7 @@
 #include "aoc.h"
 #include <regex>
 
-#define NAME Day01__Password_Philosophy
+#define NAME Day02__Password_Philosophy
 
 namespace
 {

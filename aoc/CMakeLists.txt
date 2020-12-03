@@ -1,9 +1,9 @@
+project(aoc LANGUAGES CXX)
+
 set(sources
     src/aoc.cpp
     src/intcode.cpp
-    include/aoc.h
-    include/intcode.h
 )
 
-add_library(aoc STATIC ${sources})
-target_include_directories(aoc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_library(${PROJECT_NAME} STATIC ${sources})
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
