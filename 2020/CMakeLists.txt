@@ -5,17 +5,19 @@ set(sources
     Day01.cpp
     Day02.cpp
     Day03.cpp
+    Day04.cpp
 )
 
 set(inputs
     Day01.txt
     Day02.txt
     Day03.txt
+    Day04.txt
 )
 
 list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
-add_executable(${PROJECT_NAME} ${sources} ${inputs})
+add_executable(${PROJECT_NAME} ${sources})
 target_precompile_headers(${PROJECT_NAME} PRIVATE pch.h)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_link_libraries(${PROJECT_NAME} aoc gtest)
