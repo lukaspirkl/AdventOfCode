@@ -51,7 +51,7 @@ namespace
 		}
 		if (n == 0)
 		{
-			throw std::exception("cutN with zero");
+			throw std::runtime_error("cutN with zero");
 		}
 		return newd;
 	}

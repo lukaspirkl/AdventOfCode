@@ -22,7 +22,7 @@ namespace
 			switch (result)
 			{
 			case aoc::intcode::result::inputRequested:
-				throw std::exception("Input");
+				throw std::runtime_error("Input");
 				break;
 			case aoc::intcode::result::outputProvided:
 				if (intcode.io == 10)
@@ -38,7 +38,7 @@ namespace
 				running = false;
 				break;
 			default:
-				throw std::exception("Unknown intcode result");
+				throw std::runtime_error("Unknown intcode result");
 				break;
 			}
 		}
@@ -94,7 +94,7 @@ namespace
 				running = false;
 				break;
 			default:
-				throw std::exception("Unknown intcode result");
+				throw std::runtime_error("Unknown intcode result");
 				break;
 			}
 		}

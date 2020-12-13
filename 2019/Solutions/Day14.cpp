@@ -240,14 +240,16 @@ namespace
 	TEST(NAME, InputA)
 	{
 		reactions r;
-		populate(r, aoc::readInputFile("Day14.txt").str());
+		auto input = aoc::readInputFile("Day14.txt").str(); 
+		populate(r, input);
 		EXPECT_EQ(calculateA(r), 378929);
 	}
 
 	TEST(NAME, InputB)
 	{
 		reactions r;
-		populate(r, aoc::readInputFile("Day14.txt").str());
+		auto input = aoc::readInputFile("Day14.txt").str();
+		populate(r, input);
 		
 		//EXPECT_TRUE(calculateA(r, 3445200) > 1000000000000);
 		// I manually tried some values to narrow down the possible range to 3445200-3445300

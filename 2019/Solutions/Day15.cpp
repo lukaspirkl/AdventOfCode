@@ -121,7 +121,7 @@ namespace
 						nextX++;
 						break;
 					default:
-						throw std::exception("Wrong direction in history");
+						throw std::runtime_error("Wrong direction in history");
 						break;
 					}
 					directionHistory.pop_back();
@@ -154,7 +154,7 @@ namespace
 					break;
 
 				default:
-					throw std::exception("Invalid output from intcode");
+					throw std::runtime_error("Invalid output from intcode");
 					break;
 				}
 				break;
@@ -162,7 +162,7 @@ namespace
 				running = false;
 				break;
 			default:
-				throw std::exception("Invalid intcode result");
+				throw std::runtime_error("Invalid intcode result");
 				break;
 			}
 		}

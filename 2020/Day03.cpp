@@ -25,7 +25,7 @@ namespace
         return ss;
     }
 
-    std::vector<std::string> ParseInput(std::stringstream& input)
+    std::vector<std::string> ParseInput(std::stringstream input)
     {
         std::vector<std::string> lines;
         std::string line;

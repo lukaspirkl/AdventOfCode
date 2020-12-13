@@ -1,5 +1,6 @@
 #pragma once
 #include "aoc.h"
+#include <limits>
 
 namespace aoc
 {
@@ -29,8 +30,8 @@ namespace aoc
 
 		std::vector<long long> getData();
 		int getInstruction();
-		void run(long long input, std::vector<long long>& output = std::vector<long long>());
-		void run(std::queue<long long>& input, std::vector<long long>& output = std::vector<long long>());
+		void run(long long input, std::vector<long long>* output = nullptr);
+		void run(std::queue<long long>& input, std::vector<long long>* output = nullptr);
 		intcode::result run();
 	};
 }

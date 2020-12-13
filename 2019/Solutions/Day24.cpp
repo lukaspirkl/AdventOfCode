@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "aoc.h"
+#include <cmath>
 
 #define NAME Day24__Planet_of_Discord
 
@@ -92,7 +93,7 @@ namespace
 			{
 				if (m[y][x])
 				{
-					sum += std::pow(2, (y * m[y].size()) + x);
+					sum += pow(2, (y * m[y].size()) + x);
 				}
 			}
 		}

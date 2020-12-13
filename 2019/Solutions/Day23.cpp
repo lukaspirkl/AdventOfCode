@@ -26,7 +26,7 @@ namespace
 			auto r = computers[i].intcode.run();
 			if (r != aoc::intcode::result::inputRequested)
 			{
-				throw std::exception("Input not requested during initialization.");
+				throw std::runtime_error("Input not requested during initialization.");
 			}
 			computers[i].intcode.io = i;
 			computers[i].lastResult = computers[i].intcode.run();
@@ -55,7 +55,7 @@ namespace
 						auto r = c.intcode.run();
 						if (r != aoc::intcode::result::inputRequested)
 						{
-							throw std::exception("Input not requested for second packet data.");
+							throw std::runtime_error("Input not requested for second packet data.");
 						}
 						c.intcode.io = c.received.front().second;
 						c.received.pop();
@@ -71,13 +71,13 @@ namespace
 						auto r = c.intcode.run();
 						if (r != aoc::intcode::result::outputProvided)
 						{
-							throw std::exception("Output not provided for first packet data.");
+							throw std::runtime_error("Output not provided for first packet data.");
 						}
 						packet.first = c.intcode.io;
 						r = c.intcode.run();
 						if (r != aoc::intcode::result::outputProvided)
 						{
-							throw std::exception("Output not provided for second packet data.");
+							throw std::runtime_error("Output not provided for second packet data.");
 						}
 						packet.second = c.intcode.io;
 						if (address == 255)
@@ -90,7 +90,7 @@ namespace
 				}
 				else
 				{
-					throw std::exception("Program ended.");
+					throw std::runtime_error("Program ended.");
 				}
 			}
 		}
@@ -98,7 +98,8 @@ namespace
 
 	TEST(NAME, InputA)
 	{
-		EXPECT_EQ(compute(create()), 23626);
+		auto input = create();
+		EXPECT_EQ(compute(input), 23626);
 	}
 
 	long long computeWithNAT(std::vector<computer>& computers)
@@ -128,7 +129,7 @@ namespace
 						auto r = c.intcode.run();
 						if (r != aoc::intcode::result::inputRequested)
 						{
-							throw std::exception("Input not requested for second packet data.");
+							throw std::runtime_error("Input not requested for second packet data.");
 						}
 						c.intcode.io = c.received.front().second;
 						c.received.pop();
@@ -145,13 +146,13 @@ namespace
 						auto r = c.intcode.run();
 						if (r != aoc::intcode::result::outputProvided)
 						{
-							throw std::exception("Output not provided for first packet data.");
+							throw std::runtime_error("Output not provided for first packet data.");
 						}
 						packet.first = c.intcode.io;
 						r = c.intcode.run();
 						if (r != aoc::intcode::result::outputProvided)
 						{
-							throw std::exception("Output not provided for second packet data.");
+							throw std::runtime_error("Output not provided for second packet data.");
 						}
 						packet.second = c.intcode.io;
 						if (address == 255)
@@ -168,7 +169,7 @@ namespace
 				}
 				else
 				{
-					throw std::exception("Program ended.");
+					throw std::runtime_error("Program ended.");
 				}
 			}
 			
@@ -187,6 +188,7 @@ namespace
 
 	TEST(NAME, InputB)
 	{
-		EXPECT_EQ(computeWithNAT(create()), 19019);
+		auto input = create();
+		EXPECT_EQ(computeWithNAT(input), 19019);
 	}
 }

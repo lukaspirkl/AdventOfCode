@@ -1,4 +1,5 @@
 #include "intcode.h"
+#include <cmath>
 
 namespace aoc
 {
@@ -48,7 +49,7 @@ namespace aoc
 		int parameterMode = data[pc] / (int)pow(10, param + 2) % 10;
 		if (parameterMode == 1)
 		{
-			throw std::exception("Invalid parameter mode (1) when setting value.");
+			throw std::runtime_error("Invalid parameter mode (1) when setting value.");
 			//data[pc + param + 1] = value;
 		}
 		else if (parameterMode == 2)
@@ -61,14 +62,14 @@ namespace aoc
 		}
 	}
 
-	void intcode::run(long long input, std::vector<long long>& output)
+	void intcode::run(long long input, std::vector<long long>* output)
 	{
 		std::queue<long long> inputQueue;
 		inputQueue.push(input);
 		run(inputQueue, output);
 	}
 
-	void intcode::run(std::queue<long long>& input, std::vector<long long>& output)
+	void intcode::run(std::queue<long long>& input, std::vector<long long>* output)
 	{
 		while (true)
 		{
@@ -82,10 +83,10 @@ namespace aoc
 				input.pop();
 				break;
 			case intcode::result::outputProvided:
-				output.push_back(io);
+				if (output) output->push_back(io);
 				break;
 			default:
-				throw std::exception("Unknown intcode result.");
+				throw std::runtime_error("Unknown intcode result.");
 				break;
 			}
 		}
@@ -172,7 +173,7 @@ namespace aoc
 				pc += 2;
 				break;
 			default:
-				throw std::exception("Unknown opcode.");
+				throw std::runtime_error("Unknown opcode.");
 				break;
 			}
 		}

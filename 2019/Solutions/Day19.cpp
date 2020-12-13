@@ -17,19 +17,19 @@ namespace
 		auto result = intcode.run();
 		if (result != aoc::intcode::result::inputRequested)
 		{
-			throw std::exception("First input not requested.");
+			throw std::runtime_error("First input not requested.");
 		}
 		intcode.io = x;
 		result = intcode.run();
 		if (result != aoc::intcode::result::inputRequested)
 		{
-			throw std::exception("Second input not requested.");
+			throw std::runtime_error("Second input not requested.");
 		}
 		intcode.io = y;
 		result = intcode.run();
 		if (result != aoc::intcode::result::outputProvided)
 		{
-			throw std::exception("Output not provided.");
+			throw std::runtime_error("Output not provided.");
 		}
 		cache.insert({ c, (int)intcode.io });
 		return (int)intcode.io;
