@@ -1,11 +1,18 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ - Build and debug active file",
+            "name": "(Windows) Launch",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/2020/Debug/Year2020Test.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+        },   
+        {
+            "name": "(Linux) Launch",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/buil/2020/Year2020Test",
