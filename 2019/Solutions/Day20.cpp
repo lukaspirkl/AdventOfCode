@@ -101,7 +101,7 @@ namespace
 
                     ivec2 portalEntry = (at(step(next, dir)) == '.') ? next : pos;
                     ivec2 portalExit = (at(step(next, dir)) == '.') ? step(next, dir) : step(pos, opposite(dir));
-                    printf("Found portal %s at {%3lld,%3lld}\n", label, portalEntry.x, portalEntry.y);
+                    printf("Found portal %s at {%3ld,%3ld}\n", label, portalEntry.x, portalEntry.y);
                     auto it = portalPosByLabel.find(label);
                     if (it == portalPosByLabel.end()) {
                         portalPosByLabel[label] = std::make_pair(portalEntry, portalExit);
@@ -244,7 +244,7 @@ namespace
                     ivec2 portalExit = (at(step(next, dir)) == '.') ? step(next, dir) : step(pos, opposite(dir));
                     int portalDepthChange = isOuterPortal ? -1 : 1;
 
-                    printf("Found portal %s at {%3lld,%3lld}\n", label, portalEntry.x, portalEntry.y);
+                    printf("Found portal %s at {%3ld,%3ld}\n", label, portalEntry.x, portalEntry.y);
                     auto it = portalPosByLabel.find(label);
                     if (it == portalPosByLabel.end()) {
                         portalPosByLabel[label] = std::make_pair(portalEntry, portalExit);
