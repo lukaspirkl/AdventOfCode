@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "aoc.h"
-#include <regex>
 
 #define NAME Day02__Password_Philosophy
 // https://adventofcode.com/2020/day/2

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "aoc.h"
-#include <algorithm>
 
 #define NAME Day06__Custom_Customs
 // https://adventofcode.com/2020/day/6

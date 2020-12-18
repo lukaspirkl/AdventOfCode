@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "aoc.h"
-#include <regex>
 
 #define NAME Day03__Toboggan_Trajectory
 // https://adventofcode.com/2020/day/3

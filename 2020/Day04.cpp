@@ -1,13 +1,12 @@
 #include "pch.h"
 #include "aoc.h"
-#include <regex>
 
 #define NAME Day04__Passport_Processing
 // https://adventofcode.com/2020/day/4
 
 namespace
 {
-std::stringstream GetExampleData()
+    std::stringstream GetExampleData()
     {
         std::stringstream ss;
         ss.str(R"(
