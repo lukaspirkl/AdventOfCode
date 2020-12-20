@@ -12,6 +12,7 @@ set(sources
     Day08.cpp
     Day09.cpp
     Day10.cpp
+    Day11.cpp
 )
 
 set(inputs
@@ -25,6 +26,7 @@ set(inputs
     Day08.txt
     Day09.txt
     Day10.txt
+    Day11.txt
 )
 
 list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
