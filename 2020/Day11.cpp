@@ -63,20 +63,20 @@ L.LLLLL.LL
         return c;
     }
 
-    char CalculateNew(const seats& data, size_t row, size_t column, std::function<int(const seats&, size_t, size_t)> occupiedNeghbors)
+    char CalculateNew(const seats& data, int emptyLimit, size_t row, size_t column, std::function<int(const seats&, size_t, size_t)> occupiedNeghbors)
     {
         if (data[row][column] == 'L' && occupiedNeghbors(data, row, column) == 0)
         {
             return '#';
         }
-        if (data[row][column] == '#' && occupiedNeghbors(data, row, column) >= 4)
+        if (data[row][column] == '#' && occupiedNeghbors(data, row, column) >= emptyLimit)
         {
             return 'L';
         }
         return data[row][column];
     }
 
-    size_t StabilizeAndCount(seats current, std::function<int(const seats&, size_t, size_t)> occupiedNeighbors)
+    size_t StabilizeAndCount(seats current, int emptyLimit, std::function<int(const seats&, size_t, size_t)> occupiedNeighbors)
     {
         seats next;
         for (size_t row = 0; row < current.size(); row++)
@@ -98,7 +98,7 @@ L.LLLLL.LL
             {
                 for (size_t column = 0; column < current[row].size(); column++)
                 {
-                    char newState = CalculateNew(current, row, column, occupiedNeighbors);
+                    char newState = CalculateNew(current, emptyLimit, row, column, occupiedNeighbors);
                     if (newState == '#') occupiedCount++;
                     if (newState != next[row][column]) same = false;
                     next[row][column] = newState;
@@ -109,10 +109,17 @@ L.LLLLL.LL
         return occupiedCount;
     }
 
+	TEST(NAME, ExampleA)
+	{
+        auto current = Parse(GetExampleData());
+        size_t count = StabilizeAndCount(current, 4, OccupiedNeghbors);
+        EXPECT_EQ(count, 37);	
+	}
+
 	TEST(NAME, InputA)
 	{
         auto current = Parse(aoc::readInputFile("Day11.txt"));
-        size_t count = StabilizeAndCount(current, OccupiedNeghbors);
+        size_t count = StabilizeAndCount(current, 4, OccupiedNeghbors);
         EXPECT_EQ(count, 2324);	
 	}
 
@@ -148,10 +155,36 @@ L.LLLLL.LL
         return ss;
     }
 
+    int OccupiedFar(const seats& data, size_t row, size_t column, int rowDiff, int columnDiff)
+    {
+        while(true)
+        {
+            row += rowDiff;
+            column += columnDiff;
+            if (row >= 0 && row < data.size() && column >= 0 && column < data[row].size())
+            {
+                if (data[row][column] == '#') return 1;
+                if (data[row][column] == 'L') return 0;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+
     int OccupiedFarNeghbors(const seats& data, size_t row, size_t column)
     {
-        
-        return 0;
+        int c = 0;
+        c += OccupiedFar(data, row, column, -1, -1);
+        c += OccupiedFar(data, row, column,  0, -1);
+        c += OccupiedFar(data, row, column, -1,  0);
+        c += OccupiedFar(data, row, column, +1, +1);
+        c += OccupiedFar(data, row, column,  0, +1);
+        c += OccupiedFar(data, row, column, +1,  0);
+        c += OccupiedFar(data, row, column, -1, +1);
+        c += OccupiedFar(data, row, column, +1, -1);
+        return c;
     }    
 
 	TEST(NAME, ExampleB8)
@@ -166,5 +199,19 @@ L.LLLLL.LL
         auto current = Parse(GetBSeat0());
         int count = OccupiedFarNeghbors(current, 3, 3);
         EXPECT_EQ(count, 0);
+	}
+
+    	TEST(NAME, ExampleB)
+	{
+        auto current = Parse(GetExampleData());
+        size_t count = StabilizeAndCount(current, 5, OccupiedFarNeghbors);
+        EXPECT_EQ(count, 26);	
+	}
+
+    TEST(NAME, InputB)
+	{
+        auto current = Parse(aoc::readInputFile("Day11.txt"));
+        size_t count = StabilizeAndCount(current, 5, OccupiedFarNeghbors);
+        EXPECT_EQ(count, 2068);	
 	}
 }
