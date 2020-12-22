@@ -14,6 +14,7 @@ set(sources
     Day10.cpp
     Day11.cpp
     Day12.cpp
+    Day13.cpp
 )
 
 set(inputs
