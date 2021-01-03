@@ -1,22 +1,12 @@
 project(Year2015Tests LANGUAGES CXX)
 
-set(sources
-    Main.cpp
-    md5.cpp
-    Day01.cpp
-    Day02.cpp
-    Day03.cpp
-    Day04.cpp
-    Day05.cpp
+file(GLOB sources CONFIGURE_DEPENDS 
+    ${PROJECT_SOURCE_DIR}/*.cpp
 )
 
-set(inputs
-    Day02.txt
-    Day03.txt
-    Day05.txt
+file(GLOB inputs CONFIGURE_DEPENDS 
+    ${PROJECT_SOURCE_DIR}/Day*.txt
 )
-
-list(TRANSFORM inputs PREPEND "${CMAKE_CURRENT_LIST_DIR}/")
 
 add_executable(${PROJECT_NAME} ${sources} ${inputs})
 target_precompile_headers(${PROJECT_NAME} PRIVATE pch.h)
